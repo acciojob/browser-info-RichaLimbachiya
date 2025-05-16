@@ -1,16 +1,42 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <title>Browser Information</title>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <h1>Browser Information Program</h1>
+    <div id="browser-info"></div>
 
+    <script>
+        function getBrowserInfo() {
+            let userAgent = navigator.userAgent;
+            let browserName = navigator.appName;
+            let fullVersion = navigator.appVersion;
+
+            // Better browser detection logic using userAgent
+            if (userAgent.indexOf("Firefox") > -1) {
+                browserName = "Mozilla Firefox";
+                fullVersion = userAgent.split("Firefox/")[1];
+            } else if (userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Edg") === -1) {
+                browserName = "Google Chrome";
+                fullVersion = userAgent.split("Chrome/")[1].split(" ")[0];
+            } else if (userAgent.indexOf("Edg") > -1) {
+                browserName = "Microsoft Edge";
+                fullVersion = userAgent.split("Edg/")[1];
+            } else if (userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") === -1) {
+                browserName = "Safari";
+                fullVersion = userAgent.split("Version/")[1].split(" ")[0];
+            } else if (userAgent.indexOf("OPR") > -1) {
+                browserName = "Opera";
+                fullVersion = userAgent.split("OPR/")[1];
+            }
+
+            // Display the result
+            const infoDiv = document.getElementById("browser-info");
+            infoDiv.textContent = "You are using " + browserName + " version " + fullVersion;
+        }
+
+        getBrowserInfo();
+    </script>
 </body>
-
 </html>
